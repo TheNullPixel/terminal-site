@@ -4,19 +4,14 @@ body {
   min-height: 99%;
   width: 100%;
   min-width: 550px;
-  background-color: #121212;
+  background-color: #2e004e;
   font-family: "Courier New", monospace;
   overflow-x: hidden;
 }
 
-::selection {
-  color: #E0E0E0;
-  background-color: #00A0FF;
-}
-
-::-moz-selection {
-  color: #E0E0E0;
-  background-color: #00A0FF;
+::selection, ::-moz-selection {
+  color: #2e004e;
+  background-color: #f50089;
 }
 
 textarea {
@@ -31,12 +26,12 @@ b {
 
 .cursor {
   font-size: 12px;
-  color: #4BD0D0;
-  background-color: #4BD0D0;
+  color: #00f0ff;
+  background-color: #00f0ff;
   position: relative;
   opacity: 1;
   animation: blinker 0.7s linear infinite;
-  box-shadow: 0 0 10px #4BD0D0;
+  box-shadow: 0 0 10px #00f0ff;
 }
 
 @keyframes blinker {
@@ -48,7 +43,7 @@ b {
 #command {
   cursor: text;
   height: 50px;
-  color: #00A0FF;
+  color: #00f0ff;
 }
 
 #liner {
@@ -60,7 +55,7 @@ b {
 }
 
 #liner::before {
-  color: #FF007B;
+  color: #00f0ff;
   content: "user@null-pixel-dev:~$";
 }
 
@@ -80,7 +75,7 @@ p {
   overflow: hidden;
   white-space: nowrap;
   animation: typing 0.5s steps(30, end);
-  color: #FF007B;
+  color: #00f0ff;
 }
 
 .no-animation {
@@ -101,16 +96,16 @@ p {
 }
 
 .accent {
-  color: #E0E0E0;
+  color: #f50089;
 }
 
 .command {
-  color: #00A0FF;
-  text-shadow: 0 0 10px #00A0FF;
+  color: #00f0ff;
+  text-shadow: 0 0 10px #00f0ff;
 }
 
 .error {
-  color: #ef8539;
+  color: #ff007b;
 }
 
 .inherit,
@@ -120,8 +115,13 @@ a {
 
 a {
   text-decoration: none;
+  color: #ff00ab;
 }
 
 a:focus {
   outline: none;
+}
+
+a:hover {
+  color: #f50089;
 }
