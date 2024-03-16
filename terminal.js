@@ -56,55 +56,46 @@ var banner = [
   '<span class="accent">For a list of available commands, type</span> <span class="command">\'help\'</span><span class="accent">.</span>',
 ];
 
-// Initialization
-window.onload = function init() {
-  cursor = document.getElementById("cursor");
-  cursor.style.left = "0px";
+setTimeout(function () {
+  loopLines(banner, "", 80);
+  textarea.focus();
+}, 100);
 
-  setTimeout(function () {
-    loopLines(banner, "", 80);
-    textarea.focus();
-  }, 100);
+window.addEventListener("keyup", enterKey);
 
-  textarea.value = "";
-  command.innerHTML = textarea.value;
-  window.addEventListener("keyup", enterKey);
-};
+textarea.value = "";
+command.innerHTML = textarea.value;
 
-// Functions
 function enterKey(e) {
   if (e.keyCode == 181) {
     document.location.reload(true);
   }
   if (e.keyCode == 13) {
-    // Enter key logic
-    executeCommand();
+    commands.push(command.innerHTML);
+    git = commands.length;
+    addLine(
+      "user@null-pixel-dev:~$ " + command.innerHTML,
+      "no-animation",
+      0
+    );
+    commander(command.innerHTML.toLowerCase());
+    command.innerHTML = "";
+    textarea.value = "";
   }
   if (e.keyCode == 38 && git != 0) {
-    // Up arrow key logic
-    navigateCommands(-1);
+    git -= 1;
+    textarea.value = commands[git];
+    command.innerHTML = textarea.value;
   }
   if (e.keyCode == 40 && git != commands.length) {
-    // Down arrow key logic
-    navigateCommands(1);
+    git += 1;
+    if (commands[git] === undefined) {
+      textarea.value = "";
+    } else {
+      textarea.value = commands[git];
+    }
+    command.innerHTML = textarea.value;
   }
-}
-
-function executeCommand() {
-  commands.push(command.innerHTML);
-  git = commands.length;
-  addLine("user@null-pixel-dev:~$ " + command.innerHTML, "no-animation", 0);
-  commander(command.innerHTML.toLowerCase());
-  command.innerHTML = "";
-  textarea.value = "";
-}
-
-function navigateCommands(direction) {
-  git += direction;
-  if (direction === -1 || (direction === 1 && commands[git] !== undefined)) {
-    textarea.value = commands[git] ?? "";
-  }
-  command.innerHTML = textarea.value;
 }
 
 function commander(cmd) {
@@ -162,6 +153,12 @@ function commander(cmd) {
   }
 }
 
+function newTab(link) {
+  setTimeout(function () {
+    window.open(link, "_blank");
+  }, 500);
+}
+
 function addLine(text, style, time) {
   var t = "";
   for (let i = 0; i < text.length; i++) {
@@ -189,8 +186,36 @@ function loopLines(name, style, time) {
   });
 }
 
-function newTab(link) {
-  setTimeout(function () {
-    window.open(link, "_blank");
-  }, 500);
+
+function $(elid) {
+  return document.getElementById(elid);
+}
+
+
+window.onload = init;
+
+function init() {
+  cursor = $("cursor");
+  cursor.style.left = "0px";
+}
+
+function nl2br(txt) {
+  return txt.replace(/\n/g, "");
+}
+
+function typeIt(from, e) {
+  e = e || window;
+  var w = $("typer");
+  var tw = from.value;
+  w.innerHTML = nl2br(tw);
+}
+
+function moveIt(count, e) {
+  e = e || window;
+  var keycode = e.keyCode || e.which;
+  if (keycode == 37 && parseInt(cursor.style.left) >= 0 - (count - 1) * 10) {
+    cursor.style.left = parseInt(cursor.style.left) - 10 + "px";
+  } else if (keycode == 39 && parseInt(cursor.style.left) + 10 <= 0) {
+    cursor.style.left = parseInt(cursor.style.left) + 10 + "px";
+  }
 }
