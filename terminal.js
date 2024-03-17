@@ -39,13 +39,13 @@ var projects = [
 var help = [
   "<br>",
   '<span class="command">about</span>          Who is Null Pixel?',
-  '<span class="command">social</span>         Display social networks',
-  '<span class="command">projects</span>       View project portfolio',
-  '<span class="command">history</span>        View command history',
-  '<span class="command">help</span>           Display a list of available commands',
   '<span class="command">email</span>          Get in contact with me',
+  '<span class="command">projects</span>       View project portfolio',
+  '<span class="command">social</span>         Display social networks',
   '<span class="command">clear</span>          Clear terminal',
-  '<span class="command">banner</span>         Display the header',
+  '<span class="command">help</span>           Display a list of available commands',
+  '<span class="command">history</span>        View command history',
+  '<span class="command">banner</span>         Display the banner',
   "<br>",
 ];
 
